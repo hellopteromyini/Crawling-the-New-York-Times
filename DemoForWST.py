@@ -1,3 +1,6 @@
+"""
+在这个版本的代码中，我们检索的关键词再第12行list列表中进行了定义，同时你需要注意，修改list数组之后应当同时修改第一个循环的range数量和绘图中的数量。
+"""
 import requests
 from bs4 import BeautifulSoup
 import numpy as np
@@ -6,8 +9,8 @@ import matplotlib.pyplot as plt
 import matplotlib
 
 number = {}
-list = ['2019-nCoV', 'Mers-Cov-2', 'the+COVID-19+virus', 'nCov-2019', 'Wuhan+Coronavirus']
-for i in range(5):
+list = ['2019-nCoV', 'Mers-Cov-2', 'the+COVID-19+virus', 'nCov-2019']
+for i in range(4):
     try:
         requests.adapters.DEFAULT_RETRIES = 5
         r = requests.get('https://www.nytimes.com/search', params={'query': list[i]})
@@ -42,14 +45,14 @@ for i in range(5):
 
 matplotlib.rcParams['font.sans-serif'] = ['SimHei']  # 用黑体显示中文
 matplotlib.rcParams['axes.unicode_minus'] = False
-num = np.array([number[0], number[1], number[2], number[3], number[4]])
+num = np.array([number[0], number[1], number[2], number[3]])
 """
 绘制水平条形图方法barh
 参数一：y轴
 参数二：x轴
 """
-plt.barh(range(5), num, height=0.7, color='steelblue', alpha=0.8)  # 从下往上画
-plt.yticks(range(5), ['2019-nCoV', 'Mers-Cov-2', 'the COVID-19 virus', 'nCov-2019',  'Wuhan Coronavirus'])
+plt.barh(range(4), num, height=0.7, color='steelblue', alpha=0.8)  # 从下往上画
+plt.yticks(range(4), ['2019-nCoV', 'Mers-Cov-2', 'the COVID-19 virus', 'nCov-2019',  'Wuhan Coronavirus'])
 plt.xlim(1500, 40000)
 plt.xlabel("数量")
 plt.title("纽约时报病毒名称数量统计")
